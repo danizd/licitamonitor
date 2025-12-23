@@ -18,6 +18,7 @@ services:
     networks:
       - licitamonitor-network
       - database_network
+      - proxy_network
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
@@ -41,6 +42,7 @@ services:
       - backend
     networks:
       - licitamonitor-network
+      - proxy_network
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
@@ -52,4 +54,6 @@ networks:
   licitamonitor-network:
     driver: bridge
   database_network:
+    external: true
+  proxy_network:
     external: true
