@@ -13,8 +13,11 @@ services:
       DB_NAME: ${DB_NAME:-licitaciones_espana}
       DB_USER: ${DB_USER:-admin}
       DB_PASSWORD: ${DB_PASSWORD:-admin}
-    ports:
-      - "${BACKEND_PORT:-8000}:8000"
+    # Puertos comentados - Nginx Proxy Manager gestiona el acceso
+    # ports:
+    #   - "${BACKEND_PORT:-8000}:8000"
+    expose:
+      - "8000"
     networks:
       - licitamonitor-network
       - database_network
@@ -36,8 +39,11 @@ services:
         VITE_API_URL: ${VITE_API_URL}
         VITE_USE_MOCK_DATA: ${VITE_USE_MOCK_DATA:-false}
     container_name: licitamonitor-frontend
-    ports:
-      - "${FRONTEND_PORT:-80}:80"
+    # Puertos comentados - Nginx Proxy Manager gestiona el acceso
+    # ports:
+    #   - "${FRONTEND_PORT:-80}:80"
+    expose:
+      - "80"
     depends_on:
       - backend
     networks:
